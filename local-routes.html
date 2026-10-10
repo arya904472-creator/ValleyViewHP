@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Bus Routes & Fares | Valley Transit HP</title>
+  <meta name="description" content="Official schedule and fare list for local valley bus routes across Himachal Pradesh. Timetables published exclusively by Valley Transit HP administration.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Authority Strip -->
+  <header class="gov-strip">
+    <div class="gov-strip-inner">
+      <div class="gov-strip-left">
+        <span class="gov-emblem-text">HIMACHAL PRADESH VALLEY ROAD TRANSIT</span>
+        <span style="color: #6b7280;">|</span>
+        <span>Local Feeder Network Timetable Register</span>
+      </div>
+      <div class="gov-strip-right">
+        <span id="header-admin-status"></span>
+        <a href="admin.html" class="gov-link">Depot Admin Login</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-mark">VT</div>
+        <div class="brand-text-col">
+          <span class="brand-title">Valley Transit HP</span>
+          <span class="brand-subtitle">Himachal Road & Valley Public Transport Authority</span>
+        </div>
+      </a>
+
+      <div class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="local-routes.html" class="nav-link active">Local Routes</a>
+        <a href="long-routes.html" class="nav-link">Long Routes</a>
+        <a href="admin.html" class="nav-link nav-admin-link">Admin Portal</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Live Notice Ticker -->
+  <div class="alert-ticker-bar">
+    <div class="ticker-inner">
+      <span class="ticker-label">Local Transit</span>
+      <span class="ticker-text" id="live-ticker-text">Public timetable & fare register for intra-valley and feeder bus services.</span>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <section class="hero-section" style="padding: 28px 0;">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-eyebrow">Category 01: Intra-Valley & Feeder Network</span>
+        <h1 class="hero-title" style="font-size: 1.85rem;">Local Valley Bus <span>Routes & Fares</span></h1>
+        <p class="hero-description" style="margin-bottom: 0;">
+          All official local routes, village links, market shuttles, and tehsil feeder services. Public visitors can check departure times, key stops, and standard state passenger fares.
+        </p>
+      </div>
+      <div>
+        <button type="button" onclick="window.print()" class="btn btn-secondary">
+          Print Schedule
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Search & Filter Controls -->
+    <div class="filter-bar">
+      <div class="search-input-group">
+        <input 
+          type="text" 
+          id="route-search-input" 
+          class="form-control" 
+          placeholder="Search by Origin, Destination, or Via stop (e.g. Kullu, Naggar, Theog)..."
+          autocomplete="off"
+        >
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <select id="bus-type-filter" class="filter-select">
+          <option value="all">All Bus Classes</option>
+          <option value="Ordinary">Ordinary / Rural</option>
+          <option value="Mini">Mini Bus / Feeder</option>
+          <option value="Semi-Deluxe">Semi-Deluxe</option>
+          <option value="Electric">Electric Shuttle</option>
+        </select>
+
+        <select id="status-filter" class="filter-select">
+          <option value="all">All Service Status</option>
+          <option value="Active">Active Services</option>
+          <option value="Suspended">Suspended</option>
+          <option value="Special">Special Trips</option>
+        </select>
+
+        <button type="button" id="reset-filters-btn" class="btn btn-secondary btn-sm">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Status Count -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <span id="route-count-label" style="font-size: 0.875rem; font-weight: 700; color: var(--color-text-muted);">
+        Showing 0 Local Routes
+      </span>
+      <span style="font-size: 0.8125rem; color: var(--color-text-muted);">
+        All fares in Indian Rupees (₹)
+      </span>
+    </div>
+
+    <!-- Route Timetable Table Container -->
+    <div class="table-responsive">
+      <table class="transit-table" id="local-routes-table">
+        <thead>
+          <tr>
+            <th>Route No</th>
+            <th>Origin (From)</th>
+            <th>Destination (To)</th>
+            <th>Via Stops</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Bus Class</th>
+            <th>Fare (₹)</th>
+            <th>Frequency</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="local-routes-tbody">
+          <!-- Dynamically populated or rendered as empty state -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty State Container (Displayed when 0 routes exist) -->
+    <div id="local-empty-state" class="empty-state-box" style="display: none;">
+      <div class="empty-state-icon">VT</div>
+      <h3 class="empty-state-title">No Local Routes Published Yet</h3>
+      <p class="empty-state-desc">
+        The depot administration has not published any local routes to the live timetable register yet. As per regulatory rules, only authorized depot administrators can publish routes.
+      </p>
+      <a href="admin.html" class="btn btn-primary">
+        Depot Admin: Publish First Route
+      </a>
+    </div>
+
+    <!-- Regulatory Notice Box -->
+    <div style="margin-top: 36px; background: var(--color-white); border: 1px solid var(--color-border); border-left: 4px solid var(--color-red-primary); padding: 18px 22px; border-radius: var(--card-radius);">
+      <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--color-red-primary); text-transform: uppercase; margin-bottom: 6px;">
+        Local Passenger Fare Notice
+      </h4>
+      <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.5;">
+        Fares listed above are fixed as per Himachal Pradesh State Transport Authority notification for hilly terrain. Minimum stage fare is applicable for journeys under 3 km. Concessions for bona-fide students and senior citizens apply as per valid ID proof.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <h4 class="footer-col-title">Valley Transit HP</h4>
+        <p class="footer-text">
+          Local valley and feeder network of Himachal Pradesh. Safe and dependable public transport for all valley residents and visitors.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Passenger Links</h4>
+        <ul class="footer-list">
+          <li><a href="index.html">Portal Home</a></li>
+          <li><a href="local-routes.html">Local Bus Timetables</a></li>
+          <li><a href="long-routes.html">Long Distance Routes</a></li>
+          <li><a href="admin.html">Depot Publishing Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Local Depot Helpline</h4>
+        <p class="footer-text">
+          For local inquiry, seat availability, or lost baggage, contact the respective block bus stand station master or call Central Enquiry: +91-177-2803001.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>&copy; 2026 Valley Transit HP. Official Public Transit Information System.</span>
+        <span>Public Read-Only Register</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="transit-store.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Depot Administrator Portal | Valley Transit HP</title>
+  <meta name="description" content="Authorized publishing portal for Valley Transit HP depot administration. Add and manage bus routes, schedules, fares, and daily road bulletins.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Authority Strip -->
+  <header class="gov-strip">
+    <div class="gov-strip-inner">
+      <div class="gov-strip-left">
+        <span class="gov-emblem-text">HIMACHAL PRADESH VALLEY ROAD TRANSIT</span>
+        <span style="color: #6b7280;">|</span>
+        <span>Authorized Depot Administration Portal</span>
+      </div>
+      <div class="gov-strip-right">
+        <span class="admin-badge-indicator">Depot Control Level 1</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-mark">VT</div>
+        <div class="brand-text-col">
+          <span class="brand-title">Valley Transit HP</span>
+          <span class="brand-subtitle">Himachal Road & Valley Public Transport Authority</span>
+        </div>
+      </a>
+
+      <div class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="local-routes.html" class="nav-link">Local Routes</a>
+        <a href="long-routes.html" class="nav-link">Long Routes</a>
+        <a href="admin.html" class="nav-link active nav-admin-link">Admin Portal</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- ====================================================================
+         VIEW A: LOGIN FORM (Shown when unauthenticated)
+         ==================================================================== -->
+    <div id="admin-login-view" class="admin-login-wrapper" style="display: none;">
+      <div class="admin-card">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div class="brand-mark" style="margin: 0 auto 14px auto;">VT</div>
+          <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--color-text-main);">Depot Control Sign In</h2>
+          <p style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: 4px;">
+            Enter administrative security pass to publish routes and daily service updates.
+          </p>
+        </div>
+
+        <div id="login-error-box" class="notice-box" style="display: none;"></div>
+
+        <form id="admin-login-form">
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="admin-pass-input" class="form-label">Administrative Pass Key</label>
+            <input 
+              type="password" 
+              id="admin-pass-input" 
+              class="form-control" 
+              placeholder="Enter depot access password" 
+              required
+              autocomplete="current-password"
+            >
+            <span class="form-hint">Authorized access is restricted to Valley Transit HP staff.</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            Verify & Access Depot Dashboard
+          </button>
+        </form>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-border); text-align: center;">
+          <a href="index.html" class="gov-link" style="color: var(--color-text-muted); font-size: 0.8125rem;">
+            &larr; Return to Public Timetable Portal
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         VIEW B: ADMIN DASHBOARD (Shown when authenticated)
+         ==================================================================== -->
+    <div id="admin-dashboard-view" style="display: none;">
+
+      <!-- Admin Top Toolbar -->
+      <div class="admin-header-strip">
+        <div>
+          <span style="font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; color: var(--color-red-primary); letter-spacing: 0.5px;">
+            Authorized Publishing Station
+          </span>
+          <h1 style="font-size: 1.75rem; font-weight: 800; color: var(--color-text-main);">
+            Depot Management Console
+          </h1>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span style="font-size: 0.875rem; color: var(--color-text-muted);">
+            Session Active: <strong>Admin Officer</strong>
+          </span>
+          <button type="button" id="admin-logout-btn" class="btn btn-secondary btn-sm">
+            Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab-btn active" data-tab="tab-add-route">
+          Publish New Route
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="tab-add-update">
+          Post Daily Update
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="tab-manage-routes">
+          Manage Published Routes (<span id="tab-routes-count">0</span>)
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="tab-manage-updates">
+          Manage Daily Updates (<span id="tab-updates-count">0</span>)
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="tab-tools">
+          Backup & Tools
+        </button>
+      </div>
+
+      <!-- ================================================================
+           TAB 1: PUBLISH NEW ROUTE
+           ================================================================ -->
+      <div id="tab-add-route" class="admin-tab-content">
+        <div class="admin-card">
+          <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 20px;">
+            <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-main);">
+              Publish Bus Route to Public Register
+            </h2>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
+              Specify route category (Local vs Long Route), timetable stops, bus service class, and approved passenger fare.
+            </p>
+          </div>
+
+          <form id="add-route-form">
+            <div class="form-grid">
+              
+              <div class="form-group">
+                <label for="route-type-select" class="form-label">Route Category *</label>
+                <select id="route-type-select" class="form-control" required>
+                  <option value="local">Local Route (Intra-Valley / Feeder Network)</option>
+                  <option value="long">Long Route (Inter-District / Mountain Corridor)</option>
+                </select>
+                <span class="form-hint">Determines whether route appears on Local or Long routes page.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="route-no-input" class="form-label">Route Number / Code *</label>
+                <input 
+                  type="text" 
+                  id="route-no-input" 
+                  class="form-control" 
+                  placeholder="e.g. VT-HP-101 or ML-KL-04" 
+                  required
+                >
+                <span class="form-hint">Official depot code for passenger identification.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="route-origin-input" class="form-label">Origin Station (From) *</label>
+                <input 
+                  type="text" 
+                  id="route-origin-input" 
+                  class="form-control" 
+                  placeholder="e.g. Kullu ISBT, Shimla Old Bus Stand, Manali" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="route-destination-input" class="form-label">Destination Station (To) *</label>
+                <input 
+                  type="text" 
+                  id="route-destination-input" 
+                  class="form-control" 
+                  placeholder="e.g. Naggar, Mandi, Dharamshala, Rohru" 
+                  required
+                >
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="route-via-input" class="form-label">Via Key Stops / Mountain Corridor *</label>
+                <input 
+                  type="text" 
+                  id="route-via-input" 
+                  class="form-control" 
+                  placeholder="e.g. Via Bhuntar - Bajaura - Aut Tunnel - Pandoh" 
+                  required
+                >
+                <span class="form-hint">Major intermediate stations and halting points.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="route-dept-time-input" class="form-label">Departure Time *</label>
+                <input 
+                  type="text" 
+                  id="route-dept-time-input" 
+                  class="form-control" 
+                  placeholder="e.g. 06:45 AM" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="route-arr-time-input" class="form-label">Arrival Time *</label>
+                <input 
+                  type="text" 
+                  id="route-arr-time-input" 
+                  class="form-control" 
+                  placeholder="e.g. 10:15 AM" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="route-bus-type-select" class="form-label">Bus Service Class *</label>
+                <select id="route-bus-type-select" class="form-control" required>
+                  <option value="Ordinary">Ordinary / Rural Service</option>
+                  <option value="Mini">Mini Bus / Feeder</option>
+                  <option value="Semi-Deluxe">Semi-Deluxe (2x2)</option>
+                  <option value="Superfast">Superfast Express</option>
+                  <option value="Himgaura Deluxe">Himgaura Deluxe</option>
+                  <option value="Volvo AC">Volvo A/C Seater</option>
+                  <option value="Electric">Electric Valley Shuttle</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="route-fare-input" class="form-label">Full Stage Fare (₹) *</label>
+                <input 
+                  type="number" 
+                  id="route-fare-input" 
+                  class="form-control" 
+                  placeholder="e.g. 65 or 240" 
+                  min="5" 
+                  step="1" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="route-distance-input" class="form-label">Distance (KM)</label>
+                <input 
+                  type="number" 
+                  id="route-distance-input" 
+                  class="form-control" 
+                  placeholder="e.g. 38 or 165" 
+                  min="1" 
+                  step="1"
+                >
+                <span class="form-hint">Especially useful for Long Distance route cards.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="route-schedule-select" class="form-label">Operating Schedule / Frequency *</label>
+                <select id="route-schedule-select" class="form-control" required>
+                  <option value="Daily">Daily Regular Service</option>
+                  <option value="Mon - Sat">Monday through Saturday</option>
+                  <option value="Hourly Service">Hourly Valley Shuttle</option>
+                  <option value="Morning & Evening">Morning & Evening Only</option>
+                  <option value="Night Express">Night Express Service</option>
+                  <option value="Weekend Special">Weekend Special</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="route-status-select" class="form-label">Service Operational Status *</label>
+                <select id="route-status-select" class="form-control" required>
+                  <option value="Active">Active / On-Time</option>
+                  <option value="Suspended">Temporarily Suspended</option>
+                  <option value="Special">Special Scheduled Trip</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <button type="reset" class="btn btn-secondary">
+                Clear Form
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Publish Route to Public Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TAB 2: POST DAILY UPDATE
+           ================================================================ -->
+      <div id="tab-add-update" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 20px;">
+            <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-main);">
+              Post Daily Bus & Mountain Road Bulletin
+            </h2>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted);">
+              Publish road clearance alerts, bad weather advisories, pass closures, or extra service notices directly to the Home Page daily area.
+            </p>
+          </div>
+
+          <form id="add-update-form">
+            <div class="form-grid">
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="update-title-input" class="form-label">Bulletin Headline *</label>
+                <input 
+                  type="text" 
+                  id="update-title-input" 
+                  class="form-control" 
+                  placeholder="e.g. NH-05 Morning Clearance Notice / Extra Manali Feeder Buses Added" 
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="update-category-select" class="form-label">Category *</label>
+                <select id="update-category-select" class="form-control" required>
+                  <option value="Road Condition">Road Condition & Clearance</option>
+                  <option value="Weather Alert">Weather & Snow / Rain Alert</option>
+                  <option value="Schedule Change">Schedule Modification</option>
+                  <option value="Fleet Maintenance">Fleet & Bus Maintenance</option>
+                  <option value="Special Service">Special Festival / Extra Bus</option>
+                  <option value="General Notice">General Passenger Notice</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="update-severity-select" class="form-label">Notice Priority *</label>
+                <select id="update-severity-select" class="form-control" required>
+                  <option value="normal">Standard Operational Bulletin</option>
+                  <option value="urgent">High Urgency / Emergency Road Alert</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="update-date-input" class="form-label">Effective Date *</label>
+                <input 
+                  type="date" 
+                  id="update-date-input" 
+                  class="form-control" 
+                  required
+                >
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="update-content-input" class="form-label">Detailed Notice Content *</label>
+                <textarea 
+                  id="update-content-input" 
+                  class="form-control" 
+                  rows="4" 
+                  placeholder="Provide precise details, affected routes or passes, diversion instructions, and contact helpline..."
+                  required
+                ></textarea>
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <button type="reset" class="btn btn-secondary">
+                Clear
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Post Bulletin to Live Home Page
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TAB 3: MANAGE PUBLISHED ROUTES
+           ================================================================ -->
+      <div id="tab-manage-routes" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-main);">
+                Active Published Routes Register
+              </h2>
+              <p style="font-size: 0.875rem; color: var(--color-text-muted);">
+                View, change operational status, or remove routes published to public view.
+              </p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="document.querySelector('[data-tab=tab-add-route]').click()">
+              + Add Another Route
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="transit-table">
+              <thead>
+                <tr>
+                  <th>Route Code</th>
+                  <th>Category</th>
+                  <th>Origin & Destination</th>
+                  <th>Via Corridor</th>
+                  <th>Timings</th>
+                  <th>Fare</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-routes-tbody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="admin-routes-empty" class="empty-state-box" style="display: none;">
+            <div class="empty-state-icon">0</div>
+            <h3 class="empty-state-title">No Routes In Register</h3>
+            <p class="empty-state-desc">You have not published any bus routes yet. Click 'Publish New Route' tab above to add local or long routes.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TAB 4: MANAGE DAILY UPDATES
+           ================================================================ -->
+      <div id="tab-manage-updates" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-main);">
+                Published Bulletins & Updates
+              </h2>
+              <p style="font-size: 0.875rem; color: var(--color-text-muted);">
+                All announcements currently appearing on the public home page daily updates area.
+              </p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="document.querySelector('[data-tab=tab-add-update]').click()">
+              + New Bulletin
+            </button>
+          </div>
+
+          <div id="admin-updates-list" style="display: flex; flex-direction: column; gap: 14px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TAB 5: BACKUP & TOOLS
+           ================================================================ -->
+      <div id="tab-tools" class="admin-tab-content" style="display: none;">
+        <div class="admin-card">
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-main); margin-bottom: 10px;">
+            Schedule Data Backup & Restoration
+          </h2>
+          <p style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 24px;">
+            Export the official depot timetable and bulletin register to a JSON file, or restore from a backup file.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px;">
+            <div style="background: var(--color-bg-subtle); padding: 20px; border: 1px solid var(--color-border); border-radius: var(--card-radius);">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px;">Export Schedule Backup</h3>
+              <p style="font-size: 0.8125rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Download all currently published local routes, long distance routes, and daily bulletins as a secure JSON file.
+              </p>
+              <button type="button" id="export-backup-btn" class="btn btn-secondary" style="width: 100%;">
+                Download JSON Backup
+              </button>
+            </div>
+
+            <div style="background: var(--color-bg-subtle); padding: 20px; border: 1px solid var(--color-border); border-radius: var(--card-radius);">
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 8px;">Import Backup File</h3>
+              <p style="font-size: 0.8125rem; color: var(--color-text-muted); margin-bottom: 16px;">
+                Restore schedule database from a previously exported Valley Transit HP JSON backup.
+              </p>
+              <input type="file" id="import-backup-file" accept=".json" style="display: none;">
+              <button type="button" id="import-backup-btn" class="btn btn-outline-red" style="width: 100%;">
+                Select & Load Backup
+              </button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-border); padding-top: 20px;">
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: #991b1b; margin-bottom: 6px;">
+              Danger Zone: Clear Routes Register
+            </h4>
+            <p style="font-size: 0.8125rem; color: var(--color-text-muted); margin-bottom: 12px;">
+              Permanently wipe all routes from the public timetable register. This action cannot be undone.
+            </p>
+            <button type="button" id="clear-all-routes-btn" class="btn btn-danger btn-sm">
+              Clear All Routes
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <h4 class="footer-col-title">Valley Transit HP</h4>
+        <p class="footer-text">
+          Authorized Depot Control and Passenger Scheduling Management Console.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Quick Links</h4>
+        <ul class="footer-list">
+          <li><a href="index.html">Portal Home</a></li>
+          <li><a href="local-routes.html">Local Bus Timetables</a></li>
+          <li><a href="long-routes.html">Long Distance Routes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Authorized Credentials</h4>
+        <p class="footer-text">
+          Access restricted to authorized depot superintendents. Any unauthorized modification of passenger public schedules is strictly prohibited.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>&copy; 2026 Valley Transit HP. Official Administration Portal.</span>
+        <span>Secure Protocol</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="transit-store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

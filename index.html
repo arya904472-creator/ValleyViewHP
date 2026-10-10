@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valley Transit HP | Official Public Bus Schedule & Updates</title>
+  <meta name="description" content="Official Valley Transit HP portal. View local and long-distance Himachal Pradesh bus routes, fares, timings, and daily road bulletins.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Authority Strip -->
+  <header class="gov-strip">
+    <div class="gov-strip-inner">
+      <div class="gov-strip-left">
+        <span class="gov-emblem-text">HIMACHAL PRADESH VALLEY ROAD TRANSIT</span>
+        <span style="color: #6b7280;">|</span>
+        <span>Central Control Room: <strong>+91-177-2803001</strong></span>
+      </div>
+      <div class="gov-strip-right">
+        <span id="header-admin-status"></span>
+        <a href="admin.html" class="gov-link">Depot Admin Login</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-mark">VT</div>
+        <div class="brand-text-col">
+          <span class="brand-title">Valley Transit HP</span>
+          <span class="brand-subtitle">Himachal Road & Valley Public Transport Authority</span>
+        </div>
+      </a>
+
+      <div class="main-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="local-routes.html" class="nav-link">Local Routes</a>
+        <a href="long-routes.html" class="nav-link">Long Routes</a>
+        <a href="admin.html" class="nav-link nav-admin-link">Admin Portal</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Emergency / Live Notice Ticker -->
+  <div class="alert-ticker-bar">
+    <div class="ticker-inner">
+      <span class="ticker-label">Transit Alert</span>
+      <span class="ticker-text" id="live-ticker-text">Loading latest operational update...</span>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-eyebrow">Public Transit Information System</span>
+        <h1 class="hero-title">Reliable Timetables, Fares & <span>Daily Bulletins</span></h1>
+        <p class="hero-description">
+          Valley Transit HP provides official public bus connectivity across Himachal Pradesh valleys, inter-district corridors, and key mountain passes. Routes and fare charts are published exclusively by depot administration.
+        </p>
+        <div class="hero-actions">
+          <a href="local-routes.html" class="btn btn-primary">View Local Routes</a>
+          <a href="long-routes.html" class="btn btn-outline-red">View Long Distance Routes</a>
+          <a href="#daily-updates" class="btn btn-secondary">Daily Bulletins</a>
+        </div>
+      </div>
+
+      <div class="hero-stats-box">
+        <div class="stat-item">
+          <span class="stat-val" id="stat-local-count">0</span>
+          <span class="stat-lbl">Active Local Routes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-long-count">0</span>
+          <span class="stat-lbl">Long Distance Corridors</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" style="color: #111417; font-size: 1.15rem;">24x7</span>
+          <span class="stat-lbl">Emergency Road Helpline</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- DAILY UPDATE AREA (Prominent per requirements) -->
+    <section id="daily-updates" style="margin-bottom: 50px;">
+      <div class="section-head">
+        <div class="section-title-wrap">
+          <span class="section-tag">Depot Announcements</span>
+          <h2 class="section-title">Daily Transit & Bus Updates</h2>
+          <p class="section-desc">Real-time status updates on mountain routes, weather conditions, road closures, and bus service notices.</p>
+        </div>
+        <div style="font-size: 0.8125rem; color: var(--color-text-muted);">
+          Updated Daily by Depot Control
+        </div>
+      </div>
+
+      <div class="daily-updates-container">
+        <!-- Main Bulletin Feed -->
+        <div class="updates-feed-panel">
+          <div class="panel-header">
+            <span class="panel-header-title">
+              <span style="display:inline-block; width:8px; height:8px; background:var(--color-red-primary);"></span>
+              Operational Service Bulletins
+            </span>
+            <span id="update-count-badge" style="font-size: 0.75rem; font-weight:700; color: var(--color-text-muted);">1 Update</span>
+          </div>
+
+          <div class="update-list" id="home-updates-list">
+            <!-- Rendered dynamically from transit-store.js -->
+          </div>
+        </div>
+
+        <!-- Sidebar: Mountain Corridors & Control Depots -->
+        <div class="updates-side-card">
+          <h3 class="side-card-title">Key Mountain Corridor Status</h3>
+          <ul class="side-card-list">
+            <li class="side-card-item">
+              <strong>Atal Tunnel:</strong>
+              <span>Open for routine transit traffic</span>
+            </li>
+            <li class="side-card-item">
+              <strong>Jalori Pass:</strong>
+              <span>Subject to weather & frost alerts</span>
+            </li>
+            <li class="side-card-item">
+              <strong>Shimla NH-05:</strong>
+              <span>Regular valley services operational</span>
+            </li>
+            <li class="side-card-item">
+              <strong>Kangra Valley:</strong>
+              <span>All feeder routes clear</span>
+            </li>
+          </ul>
+
+          <h3 class="side-card-title" style="margin-top: 10px;">Depot Help Desks</h3>
+          <ul class="side-card-list">
+            <li class="side-card-item">
+              <strong>Shimla ISBT:</strong>
+              <span>0177-2656326</span>
+            </li>
+            <li class="side-card-item">
+              <strong>Manali Depot:</strong>
+              <span>01902-252323</span>
+            </li>
+            <li class="side-card-item">
+              <strong>Dharamshala:</strong>
+              <span>01892-224903</span>
+            </li>
+            <li class="side-card-item">
+              <strong>Kullu Control:</strong>
+              <span>01902-222728</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Route Navigation / Directory Cards -->
+    <section style="margin-bottom: 40px;">
+      <div class="section-head">
+        <div class="section-title-wrap">
+          <span class="section-tag">Transit Network</span>
+          <h2 class="section-title">Bus Route Categories</h2>
+          <p class="section-desc">Browse schedules, stops, timings, and fares across local valley feeders and long-distance corridors.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <!-- Local Routes Card -->
+        <div style="background: var(--color-white); border: 1px solid var(--color-border); border-top: 4px solid var(--color-red-primary); padding: 26px; border-radius: var(--card-radius); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="route-no-badge">CATEGORY 01</span>
+              <span class="bus-type-tag">Local & Feeder</span>
+            </div>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--color-text-main); margin-bottom: 10px;">Local Valley Routes</h3>
+            <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 18px;">
+              Short-distance intra-district transport connecting tehsil headquarters, rural valley clusters, market centers, schools, and hospitals with regular daily frequencies.
+            </p>
+          </div>
+          <div>
+            <a href="local-routes.html" class="btn btn-primary" style="width: 100%;">View All Local Routes</a>
+          </div>
+        </div>
+
+        <!-- Long Routes Card -->
+        <div style="background: var(--color-white); border: 1px solid var(--color-border); border-top: 4px solid #111417; padding: 26px; border-radius: var(--card-radius); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="route-no-badge" style="background:#111417; color:#fff; border-color:#111417;">CATEGORY 02</span>
+              <span class="bus-type-tag">Inter-District & Interstate</span>
+            </div>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--color-text-main); margin-bottom: 10px;">Long Distance Routes</h3>
+            <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 18px;">
+              Express, Semi-Deluxe, Deluxe, and Superfast services covering long mountain corridors, inter-district connections, and regional transit hubs.
+            </p>
+          </div>
+          <div>
+            <a href="long-routes.html" class="btn btn-secondary" style="width: 100%; border-color: #111417; color: #111417;">View All Long Routes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public Notice / Regulatory Standards -->
+    <section style="background: var(--color-white); border: 1px solid var(--color-border); border-left: 4px solid var(--color-red-primary); padding: 24px; border-radius: var(--card-radius);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-main); margin-bottom: 8px;">Passenger Fare & Timetable Guidelines</h3>
+      <p style="font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.6;">
+        All routes, timings, and ticket fares displayed on this portal are authorized directly by the Valley Transit HP depot administration. Fares are calculated in accordance with state-approved mountain terrain passenger tariffs. In the event of unforeseen inclement weather, landslides, or road blocks, departure timings may be rescheduled at depot discretion.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Official Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <h4 class="footer-col-title">Valley Transit HP</h4>
+        <p class="footer-text">
+          State public road transport and valley passenger network of Himachal Pradesh. Committed to dependable, affordable, and safe passenger connectivity across hills and valley corridors.
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Passenger Links</h4>
+        <ul class="footer-list">
+          <li><a href="index.html">Portal Home</a></li>
+          <li><a href="local-routes.html">Local Bus Timetables</a></li>
+          <li><a href="long-routes.html">Long Distance Routes</a></li>
+          <li><a href="admin.html">Depot Publishing Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Depot Inquiries</h4>
+        <p class="footer-text">
+          Control Head Office: ISBT Tutikandi, Shimla, Himachal Pradesh - 171004.<br>
+          Enquiry: +91-177-2803001<br>
+          Operating Hours: 05:00 AM - 10:30 PM
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <span>&copy; 2026 Valley Transit HP. Official Public Transit Information System.</span>
+        <span>Authorized Depot Publishing Restricted</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="transit-store.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

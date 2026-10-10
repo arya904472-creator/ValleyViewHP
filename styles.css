@@ -1,0 +1,1135 @@
+/* ==========================================================================
+   VALLEY TRANSIT HP - OFFICIAL PORTAL STYLESHEET
+   Design System: Minimal Sleek White & Red Transit Authority
+   Strict constraints applied:
+   - Plain White & Red Palette (No pinks, no rainbow gradients)
+   - Rectangular / Squared Action Buttons (NO circular or pill buttons)
+   - Zero ratings / Zero reviews
+   - Clean, professional typography & tabular layouts
+   ========================================================================== */
+
+:root {
+  /* Color Palette - White & Red */
+  --color-white: #ffffff;
+  --color-bg-light: #fbfbfb;
+  --color-bg-subtle: #f4f4f4;
+  --color-border: #e2e4e8;
+  --color-border-strong: #cbd0d8;
+  
+  --color-red-primary: #c8102e;      /* Deep official transit red */
+  --color-red-dark: #a00b22;         /* Dark red for hover & contrast */
+  --color-red-deep: #7a0517;         /* Deepest red for active/accents */
+  --color-red-tint: #fdedef;         /* Very subtle red tint for alerts/highlights */
+  --color-red-tint-border: #f8b4bc;
+
+  --color-text-main: #14171a;        /* High-contrast crisp dark charcoal */
+  --color-text-muted: #536471;       /* Secondary text */
+  --color-text-inverse: #ffffff;
+
+  --color-tag-local: #a00b22;
+  --color-tag-long: #14171a;
+
+  /* Typography */
+  --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+  /* Spacing */
+  --container-max: 1200px;
+  
+  /* Strictly sharp geometric edges - NO circular buttons */
+  --btn-radius: 2px;
+  --card-radius: 4px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-light);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   TOP GOVERNMENT / TRANSIT AUTHORITY STRIP
+   ========================================================================== */
+.gov-strip {
+  background-color: #111417;
+  color: #e5e7eb;
+  font-size: 0.8125rem;
+  border-bottom: 2px solid var(--color-red-primary);
+  padding: 6px 0;
+}
+
+.gov-strip-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gov-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.gov-emblem-text {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+.gov-strip-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.gov-link {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  transition: color 0.15s ease;
+}
+
+.gov-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.admin-badge-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--btn-radius);
+}
+
+/* ==========================================================================
+   MAIN SITE HEADER & BRANDING
+   ========================================================================== */
+.site-header {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-mark {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px; /* Strictly square / rectangular */
+  border: 1px solid var(--color-red-dark);
+}
+
+.brand-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--color-red-primary);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Navigation Menu */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  color: var(--color-text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 10px 14px;
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-red-primary);
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border);
+}
+
+.nav-link.active {
+  color: var(--color-white);
+  background-color: var(--color-red-primary);
+  border-color: var(--color-red-dark);
+}
+
+.nav-admin-link {
+  color: var(--color-red-primary);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-red-primary);
+  margin-left: 8px;
+}
+
+.nav-admin-link:hover {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   TICKER / EMERGENCY BANNER
+   ========================================================================== */
+.alert-ticker-bar {
+  background-color: var(--color-red-tint);
+  border-bottom: 1px solid var(--color-red-tint-border);
+  padding: 8px 0;
+  font-size: 0.875rem;
+}
+
+.ticker-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ticker-label {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border-radius: 2px;
+}
+
+.ticker-text {
+  color: var(--color-red-dark);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   BUTTONS (CRITICAL: STRICTLY SQUARED/RECTANGULAR, NO CIRCLES)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--btn-radius); /* STRICTLY 2px, NEVER circular */
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  line-height: 1.2;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+}
+
+.btn-primary {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+  border-color: var(--color-red-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-red-dark);
+  border-color: var(--color-red-deep);
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-text-main);
+  border-color: var(--color-border-strong);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-text-muted);
+}
+
+.btn-outline-red {
+  background-color: var(--color-white);
+  color: var(--color-red-primary);
+  border-color: var(--color-red-primary);
+}
+
+.btn-outline-red:hover {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+}
+
+.btn-danger {
+  background-color: #991b1b;
+  color: var(--color-white);
+  border-color: #7f1d1d;
+}
+
+.btn-danger:hover {
+  background-color: #7f1d1d;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--color-text-main);
+  background-color: var(--color-bg-subtle);
+}
+
+/* ==========================================================================
+   PAGE HERO / ANNOUNCEMENT BANNER (Clean White & Red)
+   ========================================================================== */
+.hero-section {
+  background-color: var(--color-white);
+  border-bottom: 2px solid var(--color-red-primary);
+  padding: 44px 0 36px 0;
+}
+
+.hero-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-red-primary);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.hero-title span {
+  color: var(--color-red-primary);
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 650px;
+  margin-bottom: 20px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-stats-box {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-top: 4px solid var(--color-red-primary);
+  padding: 20px 24px;
+  border-radius: var(--card-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 260px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-red-primary);
+  line-height: 1;
+}
+
+.stat-lbl {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINER
+   ========================================================================== */
+.main-content {
+  flex: 1;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 36px 20px 60px 20px;
+  width: 100%;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--color-red-primary);
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.section-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-red-primary);
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  letter-spacing: -0.3px;
+}
+
+.section-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   DAILY UPDATES BOARD (HOME PAGE & REUSABLE)
+   ========================================================================== */
+.daily-updates-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+  margin-bottom: 44px;
+}
+
+.updates-feed-panel {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.panel-header {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-red-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-entry {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  transition: background-color 0.15s ease;
+}
+
+.update-entry:last-child {
+  border-bottom: none;
+}
+
+.update-entry:hover {
+  background-color: #fafafa;
+}
+
+.update-entry.priority-urgent {
+  border-left: 4px solid var(--color-red-primary);
+  background-color: var(--color-red-tint);
+}
+
+.update-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.update-category-tag {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-main);
+  padding: 2px 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-radius: 2px;
+}
+
+.update-category-tag.tag-urgent {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+  border-color: var(--color-red-dark);
+}
+
+.update-date {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.update-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.update-content {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.updates-side-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-red-primary);
+  padding: 22px;
+  border-radius: var(--card-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.side-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 8px;
+}
+
+.side-card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.side-card-item {
+  display: flex;
+  gap: 10px;
+  font-size: 0.875rem;
+}
+
+.side-card-item strong {
+  color: var(--color-text-main);
+  min-width: 85px;
+}
+
+.side-card-item span {
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   ROUTE TABLES & CARDS (MINIMAL, SLEEK, RECTANGULAR)
+   ========================================================================== */
+.filter-bar {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.search-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 260px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 2px; /* Strictly squared */
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-red-primary);
+  box-shadow: 0 0 0 2px rgba(200, 16, 46, 0.15);
+}
+
+.filter-select {
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 2px;
+  min-width: 170px;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-red-primary);
+}
+
+/* Timetable Table Layout */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--card-radius);
+}
+
+.transit-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9375rem;
+}
+
+.transit-table th {
+  background-color: var(--color-white);
+  color: var(--color-red-primary);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--color-red-primary);
+  white-space: nowrap;
+}
+
+.transit-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  vertical-align: middle;
+}
+
+.transit-table tbody tr:hover {
+  background-color: #fbfbfb;
+}
+
+.route-no-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.875rem;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-main);
+  padding: 3px 7px;
+  border-radius: 2px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.location-name {
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.via-stops-text {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.fare-display {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-red-primary);
+  white-space: nowrap;
+}
+
+.bus-type-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-main);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.status-active {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status-suspended {
+  background-color: var(--color-red-tint);
+  color: var(--color-red-dark);
+  border: 1px solid var(--color-red-tint-border);
+}
+
+.status-special {
+  background-color: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* ==========================================================================
+   EMPTY STATE (CRITICAL - 0 ROUTES PRE-ADDED BY AI)
+   ========================================================================== */
+.empty-state-box {
+  background-color: var(--color-white);
+  border: 1px dashed var(--color-border-strong);
+  padding: 48px 24px;
+  text-align: center;
+  border-radius: var(--card-radius);
+  margin: 20px 0;
+}
+
+.empty-state-icon {
+  width: 52px;
+  height: 52px;
+  background-color: var(--color-red-tint);
+  color: var(--color-red-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  border: 1px solid var(--color-red-tint-border);
+  border-radius: 2px;
+}
+
+.empty-state-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+}
+
+.empty-state-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  max-width: 460px;
+  margin: 0 auto 20px auto;
+}
+
+/* ==========================================================================
+   ADMIN LOGIN & DASHBOARD
+   ========================================================================== */
+.admin-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-red-primary);
+  border-radius: var(--card-radius);
+  padding: 28px;
+  margin-bottom: 30px;
+}
+
+.admin-login-wrapper {
+  max-width: 440px;
+  margin: 40px auto;
+}
+
+.admin-header-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 24px;
+}
+
+.admin-tab-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: 10px 18px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.15s ease;
+}
+
+.admin-tab-btn:hover {
+  color: var(--color-red-primary);
+}
+
+.admin-tab-btn.active {
+  color: var(--color-red-primary);
+  border-bottom-color: var(--color-red-primary);
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-main);
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.notice-box {
+  background-color: var(--color-red-tint);
+  border: 1px solid var(--color-red-tint-border);
+  border-left: 4px solid var(--color-red-primary);
+  color: var(--color-red-dark);
+  padding: 14px 18px;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   NOTIFICATION TOASTS
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background-color: #111417;
+  color: var(--color-white);
+  padding: 12px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-left: 4px solid var(--color-red-primary);
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: toastIn 0.2s ease forwards;
+  max-width: 360px;
+}
+
+@keyframes toastIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   FOOTER (Official Public Transit Portal Style)
+   ========================================================================== */
+.site-footer {
+  background-color: var(--color-white);
+  border-top: 3px solid var(--color-red-primary);
+  margin-top: auto;
+}
+
+.footer-top {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 36px 20px 28px 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 36px;
+}
+
+.footer-col-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-red-primary);
+  margin-bottom: 14px;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-list a {
+  color: var(--color-text-main);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s ease;
+}
+
+.footer-list a:hover {
+  color: var(--color-red-primary);
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  background-color: var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border);
+  padding: 14px 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.footer-bottom-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   RESPONSIVENESS & MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .daily-updates-container {
+    grid-template-columns: 1fr;
+  }
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .main-nav {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .nav-link {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .nav-admin-link {
+    margin-left: 0;
+  }
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   PRINT STYLES FOR PASSENGERS PRINTING BUS SCHEDULES
+   ========================================================================== */
+@media print {
+  .gov-strip,
+  .site-header,
+  .alert-ticker-bar,
+  .filter-bar,
+  .hero-actions,
+  .site-footer,
+  .btn,
+  .admin-badge-indicator {
+    display: none !important;
+  }
+  body, .main-content {
+    background: #fff;
+    color: #000;
+    padding: 0;
+  }
+  .transit-table th {
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+  .transit-table td {
+    border-bottom: 1px solid #ccc;
+  }
+}
